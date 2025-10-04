@@ -8,8 +8,41 @@ const ResizeObserverMock = vi.fn(() => ({
   unobserve: vi.fn(),
   disconnect: vi.fn(),
 }));
-
 vi.stubGlobal('ResizeObserver', ResizeObserverMock);
+
+// Mock for canvas getContext
+Object.defineProperty(window.HTMLCanvasElement.prototype, 'getContext', {
+  value: () => ({
+    clearRect: vi.fn(),
+    drawImage: vi.fn(),
+    save: vi.fn(),
+    restore: vi.fn(),
+    transform: vi.fn(),
+    setTransform: vi.fn(),
+    beginPath: vi.fn(),
+    arc: vi.fn(),
+    fill: vi.fn(),
+  }),
+  writable: true,
+});
+
+// Mock for navigator.mediaDevices
+Object.defineProperty(global.navigator, 'mediaDevices', {
+  value: {
+    getUserMedia: vi.fn().mockResolvedValue({
+      getTracks: () => [{ stop: vi.fn() }],
+    }),
+  },
+  writable: true,
+});
+
+// Mock for HTMLMediaElement.play
+Object.defineProperty(window.HTMLMediaElement.prototype, 'play', {
+  configurable: true,
+  get() {
+    return () => Promise.resolve();
+  }
+});
 
 // extends Vitest's expect method with methods from react-testing-library
 expect.extend(matchers);

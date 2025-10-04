@@ -1,12 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './MenuItem.css';
 
 /**
  * A single item in the expanded navigation menu.
  *
- * This component handles the rendering and interaction for all types of menu items,
- * including standard, toggle, and cycler items. It supports multi-line text with
+ * This component handles the rendering and interaction for all types of menu it
+ems,
+ * including standard, toggle, and cycler items. It supports multi-line text wit
+h
  * indentation for all lines after the first.
  *
  * @param {object} props - The component props.
@@ -14,16 +15,22 @@ import './MenuItem.css';
  * @param {string} props.item.text - The text for a standard item.
  * @param {boolean} [props.item.isToggle] - True if the item is a toggle.
  * @param {boolean} [props.item.isChecked] - The state of the toggle item.
- * @param {string} [props.item.toggleOnText] - Text for the "on" state of a toggle.
- * @param {string} [props.item.toggleOffText] - Text for the "off" state of a toggle.
+ * @param {string} [props.item.toggleOnText] - Text for the "on" state of a togg
+le.
+ * @param {string} [props.item.toggleOffText] - Text for the "off" state of a to
+ggle.
  * @param {boolean} [props.item.isCycler] - True if the item is a cycler.
- * @param {string} [props.item.selectedOption] - The currently selected option for a cycler.
+ * @param {string} [props.item.selectedOption] - The currently selected option f
+or a cycler.
  * @param {function} props.item.onClick - The click handler for the item.
- * @param {function} props.onToggle - The function to collapse the navigation rail.
- * @param {function} props.onCyclerClick - The specialized click handler for cycler items.
+ * @param {function} props.onToggle - The function to collapse the navigation ra
+il.
+ * @param {function} props.onCyclerClick - The specialized click handler for cyc
+ler items.
  */
 const MenuItem = ({ item, onToggle, onCyclerClick }) => {
-  const { text, isToggle, isChecked, toggleOnText, toggleOffText, isCycler, selectedOption, onClick } = item;
+  const { text, isToggle, isChecked, toggleOnText, toggleOffText, isCycler, sele
+ctedOption, onClick } = item;
 
   const textToShow = (() => {
     if (isToggle) return isChecked ? toggleOnText : toggleOffText;
@@ -51,21 +58,6 @@ const MenuItem = ({ item, onToggle, onCyclerClick }) => {
       ))}
     </div>
   );
-};
-
-MenuItem.propTypes = {
-  item: PropTypes.shape({
-    text: PropTypes.string,
-    isToggle: PropTypes.bool,
-    isChecked: PropTypes.bool,
-    toggleOnText: PropTypes.string,
-    toggleOffText: PropTypes.string,
-    isCycler: PropTypes.bool,
-    selectedOption: PropTypes.string,
-    onClick: PropTypes.func,
-  }).isRequired,
-  onToggle: PropTypes.func.isRequired,
-  onCyclerClick: PropTypes.func.isRequired,
 };
 
 export default MenuItem;

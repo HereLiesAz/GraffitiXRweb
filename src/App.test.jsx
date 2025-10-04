@@ -20,28 +20,6 @@ describe('App', () => {
         })
     };
 
-    // Mock for animation frame
-    global.requestAnimationFrame = vi.fn();
-    global.cancelAnimationFrame = vi.fn();
-
-    // Mock for HTMLMediaElement.play
-    Object.defineProperty(window.HTMLMediaElement.prototype, 'play', {
-        configurable: true,
-        get() {
-            return () => Promise.resolve();
-        }
-    });
-
-    // Mock for navigator.mediaDevices
-    Object.defineProperty(global.navigator, 'mediaDevices', {
-      value: {
-        getUserMedia: vi.fn().mockResolvedValue({
-          getTracks: () => [{ stop: vi.fn() }],
-        }),
-      },
-      writable: true,
-    });
-
     render(<App />);
 
     // Check for the app name, which is rendered by our mock

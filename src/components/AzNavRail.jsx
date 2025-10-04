@@ -1,27 +1,40 @@
 import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import './AzNavRail.css';
 import MenuItem from './MenuItem';
 import AzNavRailButton from './AzNavRailButton';
 
 /**
- * An M3-style navigation rail that expands into a menu drawer for web applications.
+ * An M3-style navigation rail that expands into a menu drawer for web applicati
+ons.
  *
- * This component provides a vertical navigation rail that can be expanded to a full menu drawer.
- * It is designed to be highly configurable and supports standard, toggle, and cycler navigation items.
+ * This component provides a vertical navigation rail that can be expanded to a
+full menu drawer.
+ * It is designed to be highly configurable and supports standard, toggle, and c
+ycler navigation items.
  *
  * @param {object} props - The component props.
- * @param {boolean} [props.initiallyExpanded=false] - Whether the navigation rail is expanded by default.
- * @param {boolean} [props.disableSwipeToOpen=false] - Whether to disable the swipe-to-open gesture (currently not implemented).
- * @param {Array<object>} props.content - An array of navigation item objects that define the content of the rail and menu.
- * @param {object} [props.settings={}] - An object containing settings to customize the appearance and behavior of the rail.
- * @param {boolean} [props.settings.displayAppNameInHeader=false] - If true, displays the app name in the header instead of the app icon.
- * @param {boolean} [props.settings.packRailButtons=false] - Whether to pack the rail buttons together at the top of the rail.
- * @param {string} [props.settings.expandedRailWidth='260px'] - The width of the rail when it is expanded.
- * @param {string} [props.settings.collapsedRailWidth='80px'] - The width of the rail when it is collapsed.
- * @param {boolean} [props.settings.showFooter=true] - Whether to show the footer.
- * @param {boolean} [props.settings.isLoading=false] - Whether to show the loading animation.
- * @param {string} [props.settings.appName='App'] - The name of the app to be displayed in the header.
+ * @param {boolean} [props.initiallyExpanded=false] - Whether the navigation rai
+l is expanded by default.
+ * @param {boolean} [props.disableSwipeToOpen=false] - Whether to disable the sw
+ipe-to-open gesture (currently not implemented).
+ * @param {Array<object>} props.content - An array of navigation item objects th
+at define the content of the rail and menu.
+ * @param {object} [props.settings={}] - An object containing settings to custom
+ize the appearance and behavior of the rail.
+ * @param {boolean} [props.settings.displayAppNameInHeader=false] - If true, dis
+plays the app name in the header instead of the app icon.
+ * @param {boolean} [props.settings.packRailButtons=false] - Whether to pack the
+ rail buttons together at the top of the rail.
+ * @param {string} [props.settings.expandedRailWidth='260px'] - The width of the
+ rail when it is expanded.
+ * @param {string} [props.settings.collapsedRailWidth='80px'] - The width of the
+ rail when it is collapsed.
+ * @param {boolean} [props.settings.showFooter=true] - Whether to show the foote
+r.
+ * @param {boolean} [props.settings.isLoading=false] - Whether to show the loadi
+ng animation.
+ * @param {string} [props.settings.appName='App'] - The name of the app to be di
+splayed in the header.
  */
 const AzNavRail = ({
   initiallyExpanded = false,
@@ -153,29 +166,6 @@ const AzNavRail = ({
       )}
     </div>
   );
-};
-
-AzNavRail.propTypes = {
-  initiallyExpanded: PropTypes.bool,
-  disableSwipeToOpen: PropTypes.bool,
-  content: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    text: PropTypes.string.isRequired,
-    isRailItem: PropTypes.bool,
-    onClick: PropTypes.func,
-    isCycler: PropTypes.bool,
-    options: PropTypes.arrayOf(PropTypes.string),
-    selectedOption: PropTypes.string,
-  })).isRequired,
-  settings: PropTypes.shape({
-    displayAppNameInHeader: PropTypes.bool,
-    packRailButtons: PropTypes.bool,
-    expandedRailWidth: PropTypes.string,
-    collapsedRailWidth: PropTypes.string,
-    showFooter: PropTypes.bool,
-    isLoading: PropTypes.bool,
-    appName: PropTypes.string,
-  }),
 };
 
 export default AzNavRail;
