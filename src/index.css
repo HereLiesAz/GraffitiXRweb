@@ -4,67 +4,18 @@ body {
     font-family: sans-serif;
 }
 
-#aznavrail-placeholder {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 200px;
+.App {
+  display: flex;
+  height: 100vh;
+}
+
+.main-content {
+    flex-grow: 1;
+    position: relative;
     height: 100%;
-    background-color: #f0f0f0;
-    border-right: 1px solid #ccc;
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-.controls {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.slider-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.mockup-controls {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.io-controls {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.ar-controls {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 10px;
 }
 
 .main-content a-scene {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-#main-content {
-    position: fixed;
-    left: 200px;
-    top: 0;
-    width: calc(100% - 60px);
-    height: 100%;
-}
-
-#camera-feed, #overlay-canvas {
     position: absolute;
     top: 0;
     left: 0;
@@ -77,6 +28,11 @@ body {
     top: 0;
     left: 0;
     pointer-events: none;
+}
+
+#overlay-canvas.warp-active {
+    pointer-events: auto;
+    cursor: crosshair;
 }
 
 .video-container {
