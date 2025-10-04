@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import AzNavRail from './components/AzNavRail.jsx';
+import AzNavRail from './components/lib/AzNavRail.jsx';
 import SliderDialog from './SliderDialog';
 
 function App() {
@@ -19,9 +19,9 @@ function App() {
   const imageInputRef = useRef(null);
 
   const sliderConfig = {
-    Opacity: { value: opacity, min: 0, max: 1, step: 0.01, setter: setOpacity },
-    Saturation: { value: saturation, min: 0, max: 2, step: 0.01, setter: setSaturation },
-    Contrast: { value: contrast, min: 0, max: 2, step: 0.01, setter: setContrast },
+    Opacity: { value: opacity, min: 0, max: 1, step: 0.01, setter: setOpacity, defaultValue: 0.5 },
+    Saturation: { value: saturation, min: 0, max: 2, step: 0.01, setter: setSaturation, defaultValue: 1 },
+    Contrast: { value: contrast, min: 0, max: 2, step: 0.01, setter: setContrast, defaultValue: 1 },
   };
 
   const navItems = useMemo(() => {
