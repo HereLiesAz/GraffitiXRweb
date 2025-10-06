@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import App from './App';
 
 // Mock the local AzNavRail component to prevent module resolution issues in the test environment
-vi.mock('./components/AzNavRail.jsx', () => ({
+vi.mock('./components/lib/AzNavRail.jsx', () => ({
     default: ({ settings }) => <div>{settings.appName}</div>,
 }));
 

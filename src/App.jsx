@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import AzNavRail from './components/lib/AzNavRail.jsx';
 import SliderDialog from './SliderDialog';
-import Notification from './components/lib/Notification.jsx';
 
 function App() {
   // UI State
@@ -9,7 +8,6 @@ function App() {
   const [saturation, setSaturation] = useState(1);
   const [contrast, setContrast] = useState(1);
   const [activeSlider, setActiveSlider] = useState(null);
-  const [notification, setNotification] = useState(null);
 
   // Data State
   const [overlayImage, setOverlayImage] = useState(null);
@@ -20,13 +18,22 @@ function App() {
   const imageRef = useRef(new Image());
   const imageInputRef = useRef(null);
 
-  // Handlers
-  const handleCaptureMarks = () => {
-    // This is a placeholder. In a real scenario, this would involve
-    // computer vision logic to detect features in the video feed.
-    const keypointsCount = Math.floor(Math.random() * 100) + 50; // Simulate finding keypoints
-    setNotification(`${keypointsCount} keypoints captured.`);
+  const sliderConfig = {
+    Opacity: { value: opacity, min: 0, max: 1, step: 0.01, setter: setOpacity, defaultValue: 0.5 },
+    Saturation: { value: saturation, min: 0, max: 2, step: 0.01, setter: setSaturation, defaultValue: 1 },
+    Contrast: { value: contrast, min: 0, max: 2, step: 0.01, setter: setContrast, defaultValue: 1 },
   };
+
+  const navItems = useMemo(() => {
+    return [
+      { id: 'load-image', text: 'Image', isRailItem: true, onClick: () => imageInputRef.current?.click() },
+      { id: 'opacity', text: 'Opacity', isRailItem: true, onClick: () => setActiveSlider('Opacity') },
+      { id: 'saturation', text: 'Saturation', isRailItem: true, onClick: () => setActiveSlider('Saturation') },
+      { id: 'contrast', text: 'Contrast', isRailItem: true, onClick: () => setActiveSlider('Contrast') },
+    ];
+  }, []);
+
+  const railSettings = { appName: 'GraffitiXR', displayAppNameInHeader: true };
 
   const handleImageLoad = (e) => {
     const file = e.target.files[0];
@@ -41,25 +48,6 @@ function App() {
       reader.readAsDataURL(file);
     }
   };
-
-  // Configs
-  const sliderConfig = {
-    Opacity: { value: opacity, min: 0, max: 1, step: 0.01, setter: setOpacity, defaultValue: 0.5 },
-    Saturation: { value: saturation, min: 0, max: 2, step: 0.01, setter: setSaturation, defaultValue: 1 },
-    Contrast: { value: contrast, min: 0, max: 2, step: 0.01, setter: setContrast, defaultValue: 1 },
-  };
-
-  const navItems = useMemo(() => {
-    return [
-      { id: 'load-image', text: 'Image', isRailItem: true, onClick: () => imageInputRef.current?.click() },
-      { id: 'capture-marks', text: 'Capture Marks', isRailItem: true, onClick: handleCaptureMarks },
-      { id: 'opacity', text: 'Opacity', isRailItem: true, onClick: () => setActiveSlider('Opacity') },
-      { id: 'saturation', text: 'Saturation', isRailItem: true, onClick: () => setActiveSlider('Saturation') },
-      { id: 'contrast', text: 'Contrast', isRailItem: true, onClick: () => setActiveSlider('Contrast') },
-    ];
-  }, []);
-
-  const railSettings = { appName: 'GraffitiXR', displayAppNameInHeader: true };
 
   const drawOverlay = useCallback(() => {
     if (!canvasRef.current || !videoRef.current) return;
@@ -79,7 +67,7 @@ function App() {
     }
   }, [overlayImage, opacity, saturation, contrast]);
 
-  // Effects
+  // Effect for managing camera stream
   useEffect(() => {
     const videoElement = videoRef.current;
     let stream;
@@ -104,15 +92,7 @@ function App() {
     };
   }, []);
 
-  useEffect(() => {
-    if (notification) {
-      const timer = setTimeout(() => {
-        setNotification(null);
-      }, 4000);
-      return () => clearTimeout(timer);
-    }
-  }, [notification]);
-
+  // Effect for drawing loop
   useEffect(() => {
     let animationFrameId;
     const videoElement = videoRef.current;
@@ -141,7 +121,6 @@ function App() {
         onChange={activeSlider && sliderConfig[activeSlider].setter}
         onClose={() => setActiveSlider(null)}
       />
-      <Notification message={notification} />
       <main className="main-content">
         <input type="file" ref={imageInputRef} style={{ display: 'none' }} accept="image/*" onChange={handleImageLoad} />
         <div className="video-container">
