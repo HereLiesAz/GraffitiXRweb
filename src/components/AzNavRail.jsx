@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import './AzNavRail.css';
 import MenuItem from './MenuItem';
 import AzNavRailButton from './AzNavRailButton';
@@ -167,29 +166,6 @@ const AzNavRail = ({
       )}
     </div>
   );
-};
-
-AzNavRail.propTypes = {
-  initiallyExpanded: PropTypes.bool,
-  disableSwipeToOpen: PropTypes.bool,
-  content: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    text: PropTypes.string.isRequired,
-    isRailItem: PropTypes.bool,
-    onClick: PropTypes.func,
-    isCycler: PropTypes.bool,
-    options: PropTypes.arrayOf(PropTypes.string),
-    selectedOption: PropTypes.string,
-  })).isRequired,
-  settings: PropTypes.shape({
-    displayAppNameInHeader: PropTypes.bool,
-    packRailButtons: PropTypes.bool,
-    expandedRailWidth: PropTypes.string,
-    collapsedRailWidth: PropTypes.string,
-    showFooter: PropTypes.bool,
-    isLoading: PropTypes.bool,
-    appName: PropTypes.string,
-  }),
 };
 
 export default AzNavRail;

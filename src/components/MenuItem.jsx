@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './MenuItem.css';
 
 /**
@@ -59,21 +58,6 @@ ctedOption, onClick } = item;
       ))}
     </div>
   );
-};
-
-MenuItem.propTypes = {
-  item: PropTypes.shape({
-    text: PropTypes.string,
-    isToggle: PropTypes.bool,
-    isChecked: PropTypes.bool,
-    toggleOnText: PropTypes.string,
-    toggleOffText: PropTypes.string,
-    isCycler: PropTypes.bool,
-    selectedOption: PropTypes.string,
-    onClick: PropTypes.func,
-  }).isRequired,
-  onToggle: PropTypes.func.isRequired,
-  onCyclerClick: PropTypes.func.isRequired,
 };
 
 export default MenuItem;

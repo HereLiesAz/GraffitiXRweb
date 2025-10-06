@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import useFitText from '../../hooks/useFitText';
+import useFitText from '../hooks/useFitText';
 import './AzNavRailButton.css';
 
 /**
@@ -54,21 +53,6 @@ Color: color || 'blue' }}>
       <span className="button-text" ref={textRef}>{textToShow}</span>
     </button>
   );
-};
-
-AzNavRailButton.propTypes = {
-  item: PropTypes.shape({
-    text: PropTypes.string,
-    isToggle: PropTypes.bool,
-    isChecked: PropTypes.bool,
-    toggleOnText: PropTypes.string,
-    toggleOffText: PropTypes.string,
-    isCycler: PropTypes.bool,
-    selectedOption: PropTypes.string,
-    onClick: PropTypes.func,
-    color: PropTypes.string,
-  }).isRequired,
-  onCyclerClick: PropTypes.func.isRequired,
 };
 
 export default AzNavRailButton;
