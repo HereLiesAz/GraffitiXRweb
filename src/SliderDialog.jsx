@@ -2,6 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './SliderDialog.css';
 
+/**
+ * A modal dialog for adjusting a numerical value with a slider.
+ *
+ * This component provides a customizable slider within a modal overlay. It includes
+ * a title, a range input, a numerical display of the current value, a reset button,
+ * and a button to close the dialog.
+ *
+ * @param {object} props - The component props.
+ * @param {string} props.title - The title displayed at the top of the dialog. If null, the component does not render.
+ * @param {number} props.value - The current value of the slider.
+ * @param {number} props.min - The minimum value of the slider.
+ * @param {number} props.max - The maximum value of the slider.
+ * @param {number} props.step - The step increment of the slider.
+ * @param {number} props.defaultValue - The value to reset to when the reset button is clicked.
+ * @param {function} props.onChange - The callback function invoked when the slider value changes.
+ * @param {function} props.onClose - The callback function invoked when the dialog is closed.
+ */
 const SliderDialog = ({ title, value, min, max, step, defaultValue, onChange, onClose }) => {
   if (!title) return null;
 
