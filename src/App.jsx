@@ -5,7 +5,7 @@ import Notification from './components/lib/Notification.jsx';
 
 function App() {
   // UI State
-  const [opacity, setOpacity] = useState(0.5);
+  const [opacity, setOpacity] = useState(1);
   const [saturation, setSaturation] = useState(1);
   const [contrast, setContrast] = useState(1);
   const [activeSlider, setActiveSlider] = useState(null);
@@ -44,7 +44,7 @@ function App() {
 
   // Configs
   const sliderConfig = {
-    Opacity: { value: opacity, min: 0, max: 1, step: 0.01, setter: setOpacity, defaultValue: 0.5 },
+    Opacity: { value: opacity, min: 0, max: 1, step: 0.01, setter: setOpacity, defaultValue: 1 },
     Saturation: { value: saturation, min: 0, max: 2, step: 0.01, setter: setSaturation, defaultValue: 1 },
     Contrast: { value: contrast, min: 0, max: 2, step: 0.01, setter: setContrast, defaultValue: 1 },
   };
@@ -135,12 +135,14 @@ function App() {
   return (
     <div className="App">
       <AzNavRail content={navItems} settings={railSettings} />
-      <SliderDialog
-        title={activeSlider}
-        {...(activeSlider && sliderConfig[activeSlider])}
-        onChange={activeSlider && sliderConfig[activeSlider].setter}
-        onClose={() => setActiveSlider(null)}
-      />
+      {activeSlider && (
+        <SliderDialog
+          title={activeSlider}
+          {...sliderConfig[activeSlider]}
+          onChange={sliderConfig[activeSlider].setter}
+          onClose={() => setActiveSlider(null)}
+        />
+      )}
       <Notification message={notification} />
       <main className="main-content">
         <input type="file" ref={imageInputRef} style={{ display: 'none' }} accept="image/*" onChange={handleImageLoad} />
