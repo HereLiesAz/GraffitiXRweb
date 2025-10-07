@@ -23,7 +23,9 @@ const SliderDialog = ({ title, value, min, max, step, defaultValue, onChange, on
   if (!title) return null;
 
   const handleReset = () => {
-    onChange(defaultValue);
+    if (defaultValue !== undefined) {
+      onChange(defaultValue);
+    }
   };
 
   return (
@@ -58,12 +60,12 @@ const SliderDialog = ({ title, value, min, max, step, defaultValue, onChange, on
 
 SliderDialog.propTypes = {
   title: PropTypes.string,
-  value: PropTypes.number,
-  min: PropTypes.number,
-  max: PropTypes.number,
-  step: PropTypes.number,
+  value: PropTypes.number.isRequired,
+  min: PropTypes.number.isRequired,
+  max: PropTypes.number.isRequired,
+  step: PropTypes.number.isRequired,
   defaultValue: PropTypes.number,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 
