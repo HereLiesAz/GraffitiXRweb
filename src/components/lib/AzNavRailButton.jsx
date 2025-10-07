@@ -57,7 +57,7 @@ AzNavRailButton.propTypes = {
     toggleOffText: PropTypes.string,
     isCycler: PropTypes.bool,
     selectedOption: PropTypes.string,
-    onClick: PropTypes.func,
+    onClick: PropTypes.func.isRequired,
     color: PropTypes.string,
   }).isRequired,
   onCyclerClick: PropTypes.func.isRequired,

@@ -62,7 +62,7 @@ MenuItem.propTypes = {
     toggleOffText: PropTypes.string,
     isCycler: PropTypes.bool,
     selectedOption: PropTypes.string,
-    onClick: PropTypes.func,
+    onClick: PropTypes.func.isRequired,
   }).isRequired,
   onToggle: PropTypes.func.isRequired,
   onCyclerClick: PropTypes.func.isRequired,
